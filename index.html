@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Muncak Gunung — Pendakian Gunung Sindoro, Wonosobo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=Work+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy-deep:#182534;
+    --navy-mid:#233549;
+    --sunrise:#E67E3C;
+    --amber:#F2A65A;
+    --pine:#4F6B4F;
+    --paper:#EFE8D8;
+    --paper-2:#E4DBC5;
+    --ink:#241F19;
+    --ink-soft:#54493C;
+    --line:rgba(36,31,25,0.14);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Work Sans', sans-serif;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important;}
+  }
+  h1,h2,h3{
+    font-family:'Big Shoulders Display', sans-serif;
+    text-transform:uppercase;
+    letter-spacing:0.01em;
+    line-height:0.92;
+  }
+  .mono{ font-family:'Space Mono', monospace; }
+  a{ color:inherit; }
+  .wrap{ max-width:1120px; margin:0 auto; padding:0 24px; }
+
+  /* ---------- NAV ---------- */
+  .nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(24,37,52,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid rgba(255,255,255,0.08);
+  }
+  .nav .wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    height:64px;
+  }
+  .brand{
+    font-family:'Big Shoulders Display', sans-serif;
+    font-weight:800; font-size:22px; letter-spacing:0.03em;
+    color:var(--paper); text-transform:uppercase;
+    display:flex; align-items:center; gap:8px;
+  }
+  .brand .dot{ width:9px; height:9px; border-radius:50%; background:var(--sunrise); display:inline-block; }
+  .nav-links{ display:flex; gap:28px; list-style:none; }
+  .nav-links a{
+    color:rgba(239,232,216,0.75); text-decoration:none;
+    font-size:13px; letter-spacing:0.06em; text-transform:uppercase;
+    font-weight:600; transition:color .2s ease;
+  }
+  .nav-links a:hover, .nav-links a:focus-visible{ color:var(--amber); }
+  .nav-open-badge{
+    font-family:'Space Mono',monospace; font-size:11px; color:var(--amber);
+    border:1px solid rgba(242,166,90,0.4); padding:5px 10px; border-radius:20px;
+    letter-spacing:0.05em;
+  }
+  @media (max-width:720px){ .nav-links{ display:none; } }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    min-height:92vh;
+    display:flex; flex-direction:column; justify-content:flex-end;
+    overflow:hidden;
+    background:linear-gradient(180deg, #101923 0%, #1c2a3d 28%, #4a4258 52%, #c9683a 74%, #f2a65a 100%);
+  }
+  .sun{
+    position:absolute; left:50%; top:52%; transform:translate(-50%,-50%);
+    width:170px; height:170px; border-radius:50%;
+    background:radial-gradient(circle at 50% 50%, #fff3d6 0%, #f7c873 45%, #ef8a3f 100%);
+    box-shadow:0 0 90px 30px rgba(242,166,90,0.45);
+    animation:rise 3.2s ease-out;
+  }
+  @keyframes rise{
+    from{ transform:translate(-50%,10%); opacity:0; }
+    to{ transform:translate(-50%,-50%); opacity:1; }
+  }
+  .ridge{ position:absolute; left:0; right:0; width:100%; display:block; }
+  .ridge-back{ bottom:-2px; opacity:0.55; }
+  .ridge-mid{ bottom:-2px; opacity:0.8; }
+  .ridge-front{ bottom:-2px; }
+  .hero-content{
+    position:relative; z-index:5;
+    padding:0 24px 64px;
+    max-width:1120px; margin:0 auto; width:100%;
+  }
+  .eyebrow{
+    font-family:'Space Mono',monospace; color:#fbe6c8; font-size:13px;
+    letter-spacing:0.14em; text-transform:uppercase; margin-bottom:18px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{ content:""; width:28px; height:1px; background:#fbe6c8; display:inline-block; }
+  .hero h1{
+    font-size:clamp(52px, 11vw, 128px);
+    color:#fff8ec;
+    font-weight:900;
+    text-shadow:0 6px 30px rgba(0,0,0,0.25);
+  }
+  .hero .sub{
+    margin-top:18px; max-width:560px;
+    font-size:17px; color:#fdf1de; opacity:0.92;
+  }
+  .hero-meta{
+    margin-top:34px; display:flex; flex-wrap:wrap; gap:14px;
+  }
+  .pill{
+    font-family:'Space Mono',monospace; font-size:12.5px;
+    color:#241f19; background:rgba(255,248,236,0.92);
+    padding:9px 16px; border-radius:30px; letter-spacing:0.03em;
+    display:flex; align-items:center; gap:8px;
+  }
+  .pill b{ color:#a4441f; }
+  .scroll-hint{
+    position:absolute; right:24px; bottom:28px; z-index:5;
+    writing-mode:vertical-rl; color:#fdf1de; font-family:'Space Mono',monospace;
+    font-size:11px; letter-spacing:0.15em; opacity:0.8;
+    display:flex; align-items:center; gap:8px;
+  }
+  .scroll-hint .line{ width:1px; height:46px; background:#fdf1de; opacity:0.6; }
+  @media (max-width:720px){ .scroll-hint{ display:none; } }
+
+  /* ---------- SECTION shared ---------- */
+  section{ padding:88px 0; }
+  .section-head{
+    display:flex; align-items:flex-end; justify-content:space-between;
+    gap:24px; margin-bottom:44px; flex-wrap:wrap;
+    border-bottom:1px solid var(--line); padding-bottom:22px;
+  }
+  .section-num{
+    font-family:'Space Mono',monospace; font-size:13px; color:var(--sunrise);
+    letter-spacing:0.1em; text-transform:uppercase; margin-bottom:10px;
+    display:block;
+  }
+  .section-head h2{ font-size:clamp(34px,5vw,54px); color:var(--ink); }
+  .section-head p{ max-width:340px; color:var(--ink-soft); font-size:14.5px; }
+
+  /* ---------- ZONA ---------- */
+  .zona-grid{ display:grid; grid-template-columns:1.1fr 0.9fr; gap:56px; align-items:center; }
+  @media (max-width:860px){ .zona-grid{ grid-template-columns:1fr; } }
+  .zona-text p{ color:var(--ink-soft); font-size:16px; margin-bottom:16px; max-width:520px; }
+  .zona-text .loc{
+    font-family:'Space Mono',monospace; font-size:13px; color:var(--pine);
+    letter-spacing:0.05em; margin-bottom:20px; display:inline-block;
+    border:1px solid rgba(79,107,79,0.35); padding:6px 12px; border-radius:20px;
+  }
+  .badge-row{ display:flex; gap:12px; margin-top:26px; flex-wrap:wrap; }
+  .badge{
+    background:var(--paper-2); border:1px solid var(--line); border-radius:12px;
+    padding:14px 16px; min-width:120px;
+  }
+  .badge .n{ font-family:'Big Shoulders Display'; font-size:30px; font-weight:800; color:var(--sunrise); }
+  .badge .l{ font-size:11.5px; color:var(--ink-soft); text-transform:uppercase; letter-spacing:0.06em; }
+  .zona-art{
+    position:relative; aspect-ratio:4/5; border-radius:18px; overflow:hidden;
+    background:linear-gradient(180deg,#233549 0%, #5a4a5f 45%, #d97a45 78%, #f2a65a 100%);
+  }
+  .zona-art svg{ position:absolute; bottom:0; left:0; width:100%; }
+  .zona-art .label{
+    position:absolute; top:18px; left:18px; font-family:'Space Mono',monospace;
+    color:#fff3df; font-size:12px; letter-spacing:0.08em; text-transform:uppercase;
+    background:rgba(24,37,52,0.4); padding:6px 12px; border-radius:20px;
+  }
+
+  /* ---------- CIRI KHAS / elevation profile signature ---------- */
+  .ciri{ background:var(--navy-deep); color:var(--paper); }
+  .ciri .section-head{ border-bottom:1px solid rgba(239,232,216,0.15); }
+  .ciri .section-head h2{ color:var(--paper); }
+  .ciri .section-head p{ color:rgba(239,232,216,0.65); }
+  .ciri .section-num{ color:var(--amber); }
+  .profile-wrap{ overflow-x:auto; padding-bottom:8px; }
+  .elevation{ min-width:640px; }
+  .elevation svg{ width:100%; height:auto; display:block; }
+  .ciri-copy{
+    margin-top:36px; display:grid; grid-template-columns:1fr 1fr; gap:32px;
+  }
+  @media (max-width:720px){ .ciri-copy{ grid-template-columns:1fr; } }
+  .ciri-copy h3{ font-size:24px; color:var(--amber); margin-bottom:10px; }
+  .ciri-copy p{ color:rgba(239,232,216,0.78); font-size:15px; max-width:440px; }
+  .price-tag{
+    font-family:'Space Mono',monospace; color:var(--paper); background:rgba(230,126,60,0.18);
+    border:1px solid rgba(242,166,90,0.4); display:inline-block; padding:8px 14px;
+    border-radius:8px; margin-top:14px; font-size:13.5px;
+  }
+
+  /* ---------- JADWAL ---------- */
+  .board{
+    background:var(--ink); color:var(--paper); border-radius:16px;
+    padding:36px; display:flex; align-items:center; justify-content:space-between;
+    flex-wrap:wrap; gap:24px;
+  }
+  .board .time{
+    font-family:'Big Shoulders Display'; font-weight:900;
+    font-size:clamp(64px,9vw,110px); color:var(--amber); line-height:0.85;
+  }
+  .board .time-label{ font-family:'Space Mono',monospace; font-size:13px; letter-spacing:0.08em; color:rgba(239,232,216,0.7); margin-top:8px; text-transform:uppercase;}
+  .board-right{ max-width:380px; }
+  .board-right p{ color:rgba(239,232,216,0.75); font-size:15px; }
+  .board-right .flag{
+    display:inline-flex; align-items:center; gap:8px; margin-top:14px;
+    font-family:'Space Mono',monospace; font-size:12px; color:var(--pine);
+    background:rgba(79,107,79,0.25); padding:6px 12px; border-radius:20px;
+  }
+  .flag::before{ content:"●"; color:#8fb08f; font-size:9px; }
+
+  /* ---------- TIKET ---------- */
+  .ticket-grid{ display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+  @media (max-width:720px){ .ticket-grid{ grid-template-columns:1fr; } }
+  .ticket{
+    position:relative; background:#fff8ec; border:1px solid var(--line);
+    border-radius:16px; padding:32px; overflow:hidden;
+  }
+  .ticket::before{
+    content:""; position:absolute; top:-1px; bottom:-1px; left:-1px;
+    width:6px; background:repeating-linear-gradient(180deg, var(--sunrise) 0 10px, transparent 10px 20px);
+  }
+  .ticket .who{ font-family:'Space Mono',monospace; font-size:12.5px; letter-spacing:0.08em; text-transform:uppercase; color:var(--ink-soft); }
+  .ticket .price{ font-family:'Big Shoulders Display'; font-weight:900; font-size:52px; color:var(--ink); margin-top:8px; }
+  .ticket .price span{ font-size:22px; color:var(--sunrise); vertical-align:top; }
+  .ticket ul{ list-style:none; margin-top:18px; }
+  .ticket li{ font-size:14px; color:var(--ink-soft); padding:6px 0; border-top:1px dashed var(--line); }
+  .ticket li:first-child{ border-top:none; }
+
+  /* ---------- INFO KUNJUNGAN ---------- */
+  .info-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+  @media (max-width:860px){ .info-grid{ grid-template-columns:1fr; } }
+  .info-card{
+    background:var(--paper-2); border-radius:14px; padding:26px; border:1px solid var(--line);
+  }
+  .info-card .k{ font-family:'Space Mono',monospace; font-size:12px; letter-spacing:0.08em; color:var(--sunrise); text-transform:uppercase; }
+  .info-card .v{ font-family:'Big Shoulders Display'; font-size:28px; font-weight:800; margin-top:8px; color:var(--ink); }
+  .info-card p{ font-size:13.5px; color:var(--ink-soft); margin-top:8px; }
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    background:var(--navy-deep); color:rgba(239,232,216,0.6);
+    padding:44px 0 28px;
+  }
+  footer .wrap{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; }
+  footer .brand{ color:var(--paper); }
+  footer small{ font-family:'Space Mono',monospace; font-size:11.5px; letter-spacing:0.03em; }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap">
+    <div class="brand"><span class="dot"></span>Muncak Gunung</div>
+    <ul class="nav-links">
+      <li><a href="#zona">Zona</a></li>
+      <li><a href="#ciri">Ciri Khas</a></li>
+      <li><a href="#jadwal">Jadwal</a></li>
+      <li><a href="#tiket">Tiket</a></li>
+      <li><a href="#info">Kunjungan</a></li>
+    </ul>
+    <span class="nav-open-badge">BUKA 24 JAM</span>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="sun" aria-hidden="true"></div>
+  <svg class="ridge ridge-back" viewBox="0 0 1440 300" preserveAspectRatio="none" aria-hidden="true">
+    <path fill="#2b2438" d="M0,220 L140,120 L260,190 L420,60 L560,170 L720,90 L900,200 L1060,110 L1220,180 L1440,140 L1440,300 L0,300 Z"/>
+  </svg>
+  <svg class="ridge ridge-mid" viewBox="0 0 1440 260" preserveAspectRatio="none" aria-hidden="true">
+    <path fill="#1e2233" d="M0,180 L180,90 L320,160 L480,40 L620,140 L820,70 L980,170 L1180,80 L1440,160 L1440,260 L0,260 Z"/>
+  </svg>
+  <svg class="ridge ridge-front" viewBox="0 0 1440 220" preserveAspectRatio="none" aria-hidden="true">
+    <path fill="#141b28" d="M0,160 L220,40 L360,130 L520,20 L680,110 L860,30 L1040,140 L1240,60 L1440,120 L1440,220 L0,220 Z"/>
+  </svg>
+  <div class="hero-content">
+    <span class="eyebrow">Gunung Sindoro · Wonosobo</span>
+    <h1>Muncak<br>Gunung</h1>
+    <p class="sub">Gerbang pendakian Gunung Sindoro yang indah — jalur ditata rapi, suasana hangat, dan siap menemani langkahmu dari basecamp hingga puncak.</p>
+    <div class="hero-meta">
+      <span class="pill">⏱ Mulai jalur <b>05:00</b></span>
+      <span class="pill">🎟 Anak <b>Rp25.000</b> · Dewasa <b>Rp50.000</b></span>
+      <span class="pill">🕐 Kunjungan <b>24 jam</b></span>
+    </div>
+  </div>
+  <div class="scroll-hint"><span class="line"></span>GULIR</div>
+</header>
+
+<section id="zona">
+  <div class="wrap">
+    <div class="zona-grid">
+      <div class="zona-text">
+        <span class="section-num">Zona 01</span>
+        <span class="loc">📍 Wonosobo, Jawa Tengah</span>
+        <h2 style="font-size:clamp(30px,4.5vw,44px); margin-bottom:16px;">Zona Gunung Sindoro</h2>
+        <p>Muncak Gunung berdiri di kaki Gunung Sindoro yang indah, salah satu gunung berapi paling ikonik di Wonosobo. Udara sejuk, jalur yang jelas, dan pemandangan lembah yang membentang jadi alasan pendaki datang kembali.</p>
+        <p>Kami menjaga jalur pendakian tetap tertata sejak pos keberangkatan hingga area puncak, dengan semangat kekeluargaan khas pendaki Sindoro.</p>
+        <div class="badge-row">
+          <div class="badge"><div class="n">24</div><div class="l">jam buka area</div></div>
+          <div class="badge"><div class="n">05:00</div><div class="l">jadwal mendaki</div></div>
+          <div class="badge"><div class="n">1</div><div class="l">pos ojek gunung</div></div>
+        </div>
+      </div>
+      <div class="zona-art">
+        <span class="label">Sindoro · Wonosobo</span>
+        <svg viewBox="0 0 400 500" preserveAspectRatio="none" aria-hidden="true">
+          <path fill="#141b28" opacity="0.85" d="M0,380 L60,300 L120,350 L200,220 L260,320 L320,260 L400,340 L400,500 L0,500 Z"/>
+          <path fill="#0d131c" d="M0,430 L80,360 L160,410 L240,300 L300,380 L400,320 L400,500 L0,500 Z"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="ciri" class="ciri">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <span class="section-num">Zona 02</span>
+        <h2>Ciri Khas Jalur</h2>
+      </div>
+      <p>Profil ketinggian dari basecamp menuju Pos 1, titik henti layanan ojek gunung.</p>
+    </div>
+
+    <div class="profile-wrap">
+      <div class="elevation">
+        <svg viewBox="0 0 900 220" aria-hidden="true">
+          <polyline points="20,190 140,150 260,165 400,90 560,110 700,55 860,40"
+            fill="none" stroke="#F2A65A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          <polygon points="20,190 140,150 260,165 400,90 560,110 700,55 860,40 860,210 20,210"
+            fill="url(#g1)" opacity="0.35"/>
+          <defs>
+            <linearGradient id="g1" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#F2A65A"/>
+              <stop offset="100%" stop-color="#F2A65A" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+          <circle cx="20" cy="190" r="7" fill="#EFE8D8"/>
+          <text x="20" y="215" fill="#EFE8D8" font-family="Space Mono" font-size="13">Basecamp</text>
+          <circle cx="400" cy="90" r="7" fill="#E67E3C"/>
+          <text x="405" y="80" fill="#F2A65A" font-family="Space Mono" font-size="13">Pos 1 · turun ojek</text>
+          <circle cx="860" cy="40" r="7" fill="#EFE8D8"/>
+          <text x="770" y="28" fill="#EFE8D8" font-family="Space Mono" font-size="13">Menuju puncak</text>
+        </svg>
+      </div>
+    </div>
+
+    <div class="ciri-copy">
+      <div>
+        <h3>Ojek Gunung Sindoro</h3>
+        <p>Layanan ojek lokal mengantar pendaki dari basecamp langsung menuju Pos 1, memangkas jalur awal yang cukup menanjak sebelum trekking sesungguhnya dimulai.</p>
+        <span class="price-tag">Ongkos ojek → Pos 1 · Rp20.000</span>
+      </div>
+      <div>
+        <h3>Berhenti di Pos 1</h3>
+        <p>Pos 1 adalah titik henti resmi ojek gunung — tempat pendaki turun, mengatur napas, dan melanjutkan perjalanan dengan berjalan kaki menuju pos-pos berikutnya.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="jadwal">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <span class="section-num">Zona 03</span>
+        <h2>Jadwal Mendaki</h2>
+      </div>
+      <p>Satu jadwal keberangkatan resmi setiap hari, disarankan untuk mengejar matahari terbit dari jalur Sindoro.</p>
+    </div>
+    <div class="board">
+      <div>
+        <div class="time mono">05:00</div>
+        <div class="time-label">Waktu keberangkatan pendakian</div>
+      </div>
+      <div class="board-right">
+        <p>Pendaki disarankan berkumpul di basecamp sebelum pukul 05:00 agar dapat memulai perjalanan bersama rombongan pagi dan menikmati suasana Sindoro saat fajar.</p>
+        <span class="flag">Area tetap buka 24 jam</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="tiket">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <span class="section-num">Zona 04</span>
+        <h2>Pilihan Tiket</h2>
+      </div>
+      <p>Dua kategori tiket masuk jalur pendakian Gunung Sindoro.</p>
+    </div>
+    <div class="ticket-grid">
+      <div class="ticket">
+        <span class="who">Tiket Anak</span>
+        <div class="price">Rp25<span>.000</span></div>
+        <ul>
+          <li>Berlaku untuk pendaki usia anak</li>
+          <li>Akses zona basecamp hingga jalur pendakian</li>
+          <li>Didampingi orang dewasa disarankan</li>
+        </ul>
+      </div>
+      <div class="ticket">
+        <span class="who">Tiket Dewasa</span>
+        <div class="price">Rp50<span>.000</span></div>
+        <ul>
+          <li>Berlaku untuk pendaki usia dewasa</li>
+          <li>Akses zona basecamp hingga jalur pendakian</li>
+          <li>Termasuk area istirahat di setiap pos</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="info">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <span class="section-num">Zona 05</span>
+        <h2>Info Kunjungan</h2>
+      </div>
+      <p>Hal-hal praktis sebelum berangkat ke Muncak Gunung.</p>
+    </div>
+    <div class="info-grid">
+      <div class="info-card">
+        <div class="k">Jam Buka</div>
+        <div class="v">24 Jam</div>
+        <p>Area basecamp dan pos pendaftaran melayani pendaki setiap hari, sepanjang waktu.</p>
+      </div>
+      <div class="info-card">
+        <div class="k">Jadwal Mendaki</div>
+        <div class="v">05:00</div>
+        <p>Keberangkatan rombongan pagi dimulai pukul 05:00 dari basecamp.</p>
+      </div>
+      <div class="info-card">
+        <div class="k">Lokasi</div>
+        <div class="v">Sindoro</div>
+        <p>Kawasan Gunung Sindoro, Wonosobo, Jawa Tengah.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="brand"><span class="dot"></span>Muncak Gunung</div>
+    <small>Gunung Sindoro · Wonosobo — jalur pendakian buka 24 jam</small>
+  </div>
+</footer>
+
+</body>
+</html>
